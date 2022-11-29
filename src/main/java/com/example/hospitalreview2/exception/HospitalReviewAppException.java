@@ -1,6 +1,5 @@
 package com.example.hospitalreview2.exception;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

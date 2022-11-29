@@ -20,5 +20,9 @@ spring:
     database : mysql
     hibernate.ddl-auto: update
 
+jwt:
+  token:
+    secret: hello
+
 
 
