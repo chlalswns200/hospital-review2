@@ -21,6 +21,7 @@ public class UserService {
 
     @Value("${jwt.token.secret}")
     private String secretKey;
+
     private long expireTimeMs = 1000 * 60 * 60;
 
 
