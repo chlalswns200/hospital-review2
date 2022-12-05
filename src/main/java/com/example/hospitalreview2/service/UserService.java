@@ -37,6 +37,7 @@ public class UserService {
                 .id(savedUser.getId())
                 .userName(savedUser.getUserName())
                 .emailAddress(savedUser.getEmailAddress())
+                .role(savedUser.getRole())
                 .build();
     }
 
@@ -54,7 +55,12 @@ public class UserService {
         }
 
         // 두가지 확인중 예외 안났으면 Token발행
-        return JwtTokenUtil.createToken(userName, secretKey, expireTimeMs);
+        return JwtTokenUtil.generateToken(userName, secretKey, expireTimeMs);
+    }
+
+    public User getUserByUserName(String userName) {
+        return userRepository.findByUserName(userName)
+                .orElseThrow(()->new HospitalReviewAppException(ErrorCode.NOT_FOUND,""));
     }
 
 }

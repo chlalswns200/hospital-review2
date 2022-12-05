@@ -1,22 +1,17 @@
 package com.example.hospitalreview2.domain.dto;
 
-import com.example.hospitalreview2.domain.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+@Getter
 @Builder
 @AllArgsConstructor
-@Getter
 @NoArgsConstructor
-public class UserDto {
-
+public class ReviewResponse {
     private Long id;
+    private String title;
+    private String content;
     private String userName;
-    private String password;
-    private String emailAddress;
-
-    private UserRole role;
-
+    private Long hospitalId;
 }

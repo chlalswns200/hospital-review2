@@ -6,23 +6,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+@Entity
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Entity
-public class User {
-
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(unique = true)
+    private String title;
+    private String content;
     private String userName;
-    private String password;
-    private String emailAddress;
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
 
+    @ManyToOne
+    @JoinColumn(name = "hospital_id")
+    private Hospital hospital;
 }

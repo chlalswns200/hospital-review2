@@ -1,0 +1,17 @@
+package com.example.hospitalreview2.domain.dto;
+
+import lombok.*;
+
+import java.util.List;
+
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Setter
+public class HospitalResponse {
+    private Long id;
+    private String roadNameAddress;
+    private String hospitalName;
+    private List<ReviewResponse> reviews;
+}
