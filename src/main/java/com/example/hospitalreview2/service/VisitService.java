@@ -4,6 +4,7 @@ import com.example.hospitalreview2.domain.Hospital;
 import com.example.hospitalreview2.domain.User;
 import com.example.hospitalreview2.domain.Visit;
 import com.example.hospitalreview2.domain.dto.VisitCreateRequest;
+import com.example.hospitalreview2.domain.dto.VisitListResponse;
 import com.example.hospitalreview2.exception.ErrorCode;
 import com.example.hospitalreview2.exception.HospitalReviewAppException;
 import com.example.hospitalreview2.repository.HospitalRepository;
@@ -14,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 @Service
@@ -36,5 +39,21 @@ public class VisitService {
                 .build();
 
         visitRepository.save(build);
+    }
+
+    public List<VisitListResponse> getList() {
+        List<Visit> all = visitRepository.findAll();
+        List<VisitListResponse> visitAllList = new ArrayList<>();
+        for (Visit visit : all) {
+            VisitListResponse vlr = VisitListResponse.builder()
+                    .userName(visit.getUser().getUserName())
+                    .hospitalName(visit.getHospital().getHospitalName())
+                    .diseaseName(visit.getDisease())
+                    .localDate(visit.getLocalDate())
+                    .amount(visit.getAmount())
+                    .build();
+            visitAllList.add(vlr);
+        }
+        return visitAllList;
     }
 }
