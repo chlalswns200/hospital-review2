@@ -1,6 +1,7 @@
 package com.example.hospitalreview2.controller;
 
 import com.example.hospitalreview2.domain.dto.VisitCreateRequest;
+import com.example.hospitalreview2.domain.dto.VisitListOneUserResponse;
 import com.example.hospitalreview2.domain.dto.VisitListResponse;
 import com.example.hospitalreview2.service.VisitService;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +36,12 @@ public class VisitController {
     public ResponseEntity<List<VisitListResponse>> getVisitList() {
         List<VisitListResponse> list = visitService.getList();
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<VisitListOneUserResponse>> getOneList(@PathVariable Long id) {
+        List<VisitListOneUserResponse> oneUserList = visitService.findOneUserList(id);
+        return ResponseEntity.ok(oneUserList);
+
     }
 }
