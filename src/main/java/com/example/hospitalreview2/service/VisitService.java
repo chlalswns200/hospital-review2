@@ -4,6 +4,7 @@ import com.example.hospitalreview2.domain.Hospital;
 import com.example.hospitalreview2.domain.User;
 import com.example.hospitalreview2.domain.Visit;
 import com.example.hospitalreview2.domain.dto.VisitCreateRequest;
+import com.example.hospitalreview2.domain.dto.VisitListOneUserResponse;
 import com.example.hospitalreview2.domain.dto.VisitListResponse;
 import com.example.hospitalreview2.exception.ErrorCode;
 import com.example.hospitalreview2.exception.HospitalReviewAppException;
@@ -47,6 +48,21 @@ public class VisitService {
         for (Visit visit : all) {
             VisitListResponse vlr = VisitListResponse.builder()
                     .userName(visit.getUser().getUserName())
+                    .hospitalName(visit.getHospital().getHospitalName())
+                    .diseaseName(visit.getDisease())
+                    .localDate(visit.getLocalDate())
+                    .amount(visit.getAmount())
+                    .build();
+            visitAllList.add(vlr);
+        }
+        return visitAllList;
+    }
+
+    public List<VisitListOneUserResponse> findOneUserList(Long id) {
+        List<Visit> byUserId = visitRepository.findByUserId(id);
+        List<VisitListOneUserResponse> visitAllList = new ArrayList<>();
+        for (Visit visit : byUserId) {
+            VisitListOneUserResponse vlr = VisitListOneUserResponse.builder()
                     .hospitalName(visit.getHospital().getHospitalName())
                     .diseaseName(visit.getDisease())
                     .localDate(visit.getLocalDate())
