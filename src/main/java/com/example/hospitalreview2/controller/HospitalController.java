@@ -7,14 +7,17 @@ import com.example.hospitalreview2.domain.dto.ReviewResponse;
 import com.example.hospitalreview2.service.HospitalService;
 import com.example.hospitalreview2.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/hospitals")
 @RequiredArgsConstructor
+@Slf4j
 public class HospitalController {
 
     private final HospitalService hospitalService;
@@ -34,8 +37,9 @@ public class HospitalController {
     }
 
     @PostMapping("/{id}/reviews")
-    public ResponseEntity<ReviewAddResponse> createReview(@PathVariable Long id, @RequestBody ReviewAddRequest request){
+    public ResponseEntity<ReviewAddResponse> createReview(@PathVariable Long id, @RequestBody ReviewAddRequest request, Authentication authentication){
+        log.info("isAuthenticated:{},name:{},principle:{},authorities:{}",
+                authentication.isAuthenticated(), authentication.getName(), authentication.getPrincipal().toString(),authentication.getAuthorities().toString());
         return ResponseEntity.ok().body(reviewService.add(request, id));
-
     }
 }
