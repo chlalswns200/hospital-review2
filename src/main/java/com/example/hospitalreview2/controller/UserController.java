@@ -18,7 +18,7 @@ public class UserController {
     private final UserService userService;
 
     @ApiOperation(value = "회원 가입")
-    @PostMapping
+    @PostMapping("/join")
     public Response<UserJoinResponse> join (@RequestBody UserJoinRequest userJoinRequest){
         UserDto userDto = userService.join(userJoinRequest);
         return Response.success(new UserJoinResponse(userDto.getUserName(), userDto.getEmailAddress()));
