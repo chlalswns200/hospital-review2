@@ -1,33 +1,34 @@
 package com.example.hospitalreview2.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Builder
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Entity
-@Builder
-public class Visit {
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class Visit extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private LocalDate localDate;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @ManyToOne
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
+    private LocalDate localDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private String disease;
 
-    private Float amount;
-
+    private float amount;
 }

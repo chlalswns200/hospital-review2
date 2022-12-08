@@ -72,4 +72,14 @@ public class VisitService {
         }
         return visitAllList;
     }
+    /*
+    public List<VisitResponse> findAllByPage(Pageable pageable) {
+        Page<Visit> visits = visitRepository.findAll(pageable);
+
+        // Visits --> VisitResponse
+        return visits.stream()
+                .map(Visit::toResponse)
+                .collect(Collectors.toList());
+    }
+    */
 }
